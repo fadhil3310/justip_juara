@@ -1,11 +1,16 @@
 from urllib.request import urlopen
 import json
+from xmlrpc.client import boolean
 import winrt.windows.devices.geolocation as wdg
 
 
-async def get_current_location():
+async def get_current_location() -> wdg.Geocoordinate:
     locator = wdg.Geolocator()
-    pos = await locator.get_geoposition_async()
+    try:
+        pos = await locator.get_geoposition_async()
+    except Exception as e:
+        print("Gagal dapat lokasi. Pastikan lokasi dinyalakan dan akses lokasi diberikan kepada aplikasi desktop")
+        raise e
     return pos.coordinate
 
 # Tes tes tes tes

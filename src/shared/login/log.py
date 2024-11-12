@@ -1,26 +1,26 @@
 
 
-def register(username, password, nama):
-    # Membuka file akun.txt dalam mode append (menambahkan data di akhir file)
-    with open("akun.txt", "a") as file:
-        # Menulis username, password, dan nama ke dalam file
-        file.write(f"{username},{password},{nama}\n")
+import os
+
+def register(username, password, nama, akun):
+    # Membuat folder 'login' jika belum ada
+    os.makedirs("login", exist_ok=True)
+    # Menyimpan file akun.txt di dalam folder 'login'
+    with open("login/akun.csv", "a") as file:
+        file.write(f"{username},{password},{nama},{akun}\n")
     print("Registrasi berhasil.")
 
 def login(username, password):
-    # Membuka file akun.txt dalam mode baca
+    # Membaca file akun.txt dari folder 'login'
     try:
-        with open("akun.txt", "r") as file:
-            # Membaca setiap baris dalam file
+        with open("login/akun.csv", "r") as file:
             for line in file:
-                # Memisahkan baris berdasarkan koma
-                stored_username, stored_password, stored_nama = line.strip().split(",")
-                # Memeriksa kecocokan username dan password
+                stored_username, stored_password, stored_nama, stored_akun = line.strip().split(",")
                 if stored_username == username and stored_password == password:
                     print("Login berhasil.")
                     return stored_nama  # Mengembalikan nama pengguna yang berhasil login
     except FileNotFoundError:
-        print("File akun.txt tidak ditemukan.")
+        print("File akun.csv tidak ditemukan.")
     print("Username atau password salah.")
     return None
 
@@ -31,8 +31,12 @@ while True:
     if pilihan == "register":
         username = input("Masukkan username: ")
         password = input("Masukkan password: ")
-        nama = input("Masukkan nama lengkap: ")        
-        register(username, password, nama)
+        nama = input("Masukkan nama lengkap: ")
+        akun = input("Tipe akun? 'mitra' atau 'pelanggan':").strip().lower()        
+        if akun != "mitra" and akun != "pelanggan":
+            print("Tipe akun hanya bisa 'mitra' atau 'pelanggan'")
+        else: 
+            register(username, password, nama, akun)
     elif pilihan == "login":
         username = input("Masukkan username: ")
         password = input("Masukkan password: ")

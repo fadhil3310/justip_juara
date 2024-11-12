@@ -1,0 +1,5 @@
+as,qw,sw, mitra
+ambawa,123,rusdi ngawi, pelanggan
+dd,11,ngawi, mitra
+tes,123,amba, mitra
+ww,123,dd, mitra

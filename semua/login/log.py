@@ -1,5 +1,3 @@
-
-
 def register(username, password, name, account_type):
     # Membuat folder 'login' jika belum ada
     # os.makedirs("login", exist_ok=True)
@@ -57,5 +55,3 @@ def authenticate():
                 print(f"Username atau password salah\n")
         else:
             print("Pilihan tidak valid.")
-
-    

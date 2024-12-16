@@ -4,7 +4,7 @@ import json
 
 def save_to_csv(pilihan, barang, kuantitas, total, tip, alamat, username, name, status):
     # Menyimpan data pesanan ke file CSV
-    with open('pesanan.csv', mode='a', newline='') as file:
+    with open('pesan.csv', mode='a', newline='') as file:
         writer = csv.writer(file)
         # Format: [pilihan, barang, alamat, username, name]
         writer.writerow([pilihan, barang, kuantitas, total, tip, alamat, username, name, status])

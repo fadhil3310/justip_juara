@@ -2,12 +2,12 @@ import csv
 import sys
 import json
 
-def save_to_csv(pilihan, barang, alamat, username, name):
+def save_to_csv(pilihan, barang, alamat, username, name, status):
     # Menyimpan data pesanan ke file CSV
     with open('pesanan.csv', mode='a', newline='') as file:
         writer = csv.writer(file)
         # Format: [pilihan, barang, alamat, username, name]
-        writer.writerow([pilihan, barang, alamat, username, name])
+        writer.writerow([pilihan, barang, alamat, username, name, status])
     print(f"Pesanan {barang} telah disimpan ke file pesanan.csv.\n")
 
 def show_catalog(data_akun):
@@ -38,7 +38,7 @@ def beli_barang(data_akun):
     print(f"\nPesanan Anda: {barang} akan dikirim ke {alamat}.")
     
     # Simpan pesanan ke CSV
-    save_to_csv("Beli Barang", barang, alamat, data_akun["username"], data_akun["name"])
+    save_to_csv("Beli Barang", barang, alamat, data_akun["username"], data_akun["name"], "dipesan")
 
 def makanan(data_akun):
     print("\nAnda memilih jasa titip 'Makanan'.")
@@ -48,7 +48,7 @@ def makanan(data_akun):
     print(f"\nPesanan Anda: {makanan} akan dikirim ke {alamat}.")
     
     # Simpan pesanan ke CSV
-    save_to_csv("Makanan", makanan, alamat, data_akun["username"], data_akun["name"])
+    save_to_csv("Makanan", makanan, alamat, data_akun["username"], data_akun["name"], "dipesan")
 
 def barang_tugas(data_akun):
     print("\nAnda memilih jasa titip 'Barang Tugas'.")
@@ -58,7 +58,7 @@ def barang_tugas(data_akun):
     print(f"\nPesanan Anda: {tugas} untuk tugas akan dikirim ke {alamat}.")
     
     # Simpan pesanan ke CSV
-    save_to_csv("Barang Tugas", tugas, alamat, data_akun["username"], data_akun["name"])
+    save_to_csv("Barang Tugas", tugas, alamat, data_akun["username"], data_akun["name"], "dipesan")
 
 if __name__ == "__main__":
     # Menerima data akun dari argumen command line

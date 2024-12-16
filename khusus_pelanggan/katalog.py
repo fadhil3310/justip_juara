@@ -1,3 +1,12 @@
+import csv
+
+def save_to_csv(pilihan, barang, alamat):
+    # Menyimpan data pesanan ke file CSV
+    with open('pesanan.csv', mode='a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([pilihan, barang, alamat])
+    print(f"Pesanan {barang} telah disimpan ke file pesanan.csv.\n")
+
 def show_catalog():
     print("Selamat datang di katalog jasa titip!")
     print("Pilih jenis jasa titip yang ingin Anda pesan:")
@@ -21,10 +30,11 @@ def beli_barang():
     print("\nAnda memilih jasa titip 'Beli Barang'.")
     barang = input("Masukkan nama barang yang ingin dibeli: ").strip()
     alamat = input("Masukkan alamat pengiriman: ").strip()
-    jumlah = input("Masukkan jumlah barang: ").strip()
     
-    print(f"\nPesanan Anda: {jumlah} {barang} akan dikirim ke {alamat}.")
-    print("Jasa titip 'Beli Barang' berhasil dipesan.\n")
+    print(f"\nPesanan Anda: {barang} akan dikirim ke {alamat}.")
+    
+    # Simpan pesanan ke CSV
+    save_to_csv("Beli Barang", barang, alamat)
 
 def makanan():
     print("\nAnda memilih jasa titip 'Makanan'.")
@@ -32,7 +42,9 @@ def makanan():
     alamat = input("Masukkan alamat pengiriman: ").strip()
     
     print(f"\nPesanan Anda: {makanan} akan dikirim ke {alamat}.")
-    print("Jasa titip 'Makanan' berhasil dipesan.\n")
+    
+    # Simpan pesanan ke CSV
+    save_to_csv("Makanan", makanan, alamat)
 
 def barang_tugas():
     print("\nAnda memilih jasa titip 'Barang Tugas'.")
@@ -40,7 +52,9 @@ def barang_tugas():
     alamat = input("Masukkan alamat pengiriman: ").strip()
     
     print(f"\nPesanan Anda: {tugas} untuk tugas akan dikirim ke {alamat}.")
-    print("Jasa titip 'Barang Tugas' berhasil dipesan.\n")
+    
+    # Simpan pesanan ke CSV
+    save_to_csv("Barang Tugas", tugas, alamat)
 
 if __name__ == "__main__":
     show_catalog()

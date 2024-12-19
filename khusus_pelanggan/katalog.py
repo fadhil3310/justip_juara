@@ -69,13 +69,11 @@ def barang_tugas(data_akun):
     # Simpan pesanan ke CSV
     save_to_csv("Barang Tugas", tugas, kuantitas, total, tip, alamat, data_akun["username"], data_akun["name"], "dipesan")
 
-if __name__ == "__main__":
+def start(data_akun):
     # Menerima data akun dari argumen command line
-    if len(sys.argv) > 1:
-        try:
-            data_akun = json.loads(sys.argv[1])
-            show_catalog(data_akun)
-        except (json.JSONDecodeError, IndexError):
-            print("Data akun tidak valid. Pastikan data akun dikirim dengan benar.")
-    else:
-        print("Data akun tidak ditemukan. Harap jalankan melalui main.py.")
+
+    try:
+        show_catalog(data_akun)
+    except (json.JSONDecodeError, IndexError):
+        print("Data akun tidak valid. Pastikan data akun dikirim dengan benar.")
+    

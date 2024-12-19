@@ -1,6 +1,8 @@
-import subprocess
+
 import semua.login.log as login
-import json
+
+import khusus_pelanggan.katalog as katalog
+import khusus_mitra.job as job
 
 # Autentikasi dan login
 data_akun = login.authenticate()
@@ -14,10 +16,11 @@ if data_akun['account_type'] == 'pelanggan':
     print("Akun 'pelanggan' terdeteksi. Menjalankan katalog...")
     
     # Menjalankan katalog.py dengan mengirimkan data akun sebagai argumen
-    subprocess.run(['python', 'khusus_pelanggan/katalog.py', json.dumps(data_akun)])
+    katalog.start(data_akun)
 elif data_akun['account_type'] == 'mitra':
     print("Akun 'mitra' terdeteksi. Menjalankan job...")
-    subprocess.run(['python', 'khusus_mitra/job.py', json.dumps(data_akun)])
+    job.main(data_akun)
+
 
 else:
     print("Akun bukan pelanggan. Akses ke katalog tidak diberikan.")

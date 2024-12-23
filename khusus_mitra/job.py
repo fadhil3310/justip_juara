@@ -4,6 +4,8 @@ import sys
 import os
 import time
 
+
+
 def baca_csv_ke_dictionary(nama_file):
     hasil = []
     with open(nama_file, mode='r', encoding='utf-8') as file:
@@ -15,7 +17,7 @@ def baca_csv_ke_dictionary(nama_file):
                 print(f"Baris {idx} dilewati: Kosong atau tidak valid.")
                 continue
 
-            if baris[-1].strip().lower() == "dipesan":
+            if baris[8].strip().lower() == "dipesan":
                 data = {
                     "No": idx,
                     "Nama": baris[7],
@@ -36,9 +38,9 @@ def ubah_status_pesanan(nama_file, baris_csv, nomor_idx, nama, username):
         for idx, baris in enumerate(baris_csv, start=1):
             if idx == nomor_idx:
                 print(f"Pesanan dengan No {nomor_idx} diubah statusnya menjadi 'diterima'.")
-                baris[-1] = "diterima"
-                baris.append(nama)
-                baris.append(username)
+                baris[8] = "diterima"
+                baris[9] = nama
+                baris[10] = username
             writer.writerow(baris)
 
 def tampilkan_data(nama_file):
@@ -60,11 +62,11 @@ def tampilkan_data(nama_file):
 
     return baris_csv
 
-def main(data_akun):
-    nama_file = "buy.csv"
+def daftar_pesanan(data_akun):
+    nama_file = "send.csv"
 
     print(f"Selamat datang, {data_akun['name']}!")
-    print(f"Anda masuk sebagai mitra dengan username: {data_akun['username']}.\n")
+    print(f"Anda masuk sebagai mitra dengan username: {data_akun['username']}\n")
 
     while True:
         baris_csv = tampilkan_data(nama_file)
@@ -90,6 +92,121 @@ def main(data_akun):
             print("Input harus berupa angka!")
 
         time.sleep(2)
+
+def status_pesanan(data_akun):
+    print("Status Pesanan:\n")
+    with open('send.csv', mode='r', encoding='utf-8') as file:
+        reader = csv.reader(file)
+        ditemukan = False
+        nomor = 1  # Inisialisasi nomor pesanan
+
+        for row in reader:
+            if len(row) > 8 and row[10].lower() == data_akun['username']:
+                ditemukan = True
+                print(f"No: {nomor}")  # Tambahkan nomor pesanan
+                print(f"Jenis barang: {row[0]}")
+                print(f"Nama barang: {row[1]}")
+                print(f"Jumlah: {row[2]}")
+                print(f"Harga total: {row[3]}")
+                print(f"Tip: {row[4]}")
+                print(f"Lokasi: {row[5]}")
+                print(f"Status: {row[8]}")
+                print("-" * 30)
+                nomor += 1  # Tambahkan 1 ke nomor untuk setiap pesanan
+
+        if not ditemukan:
+            print("Tidak ada pesanan yang ditemukan untuk akun ini.")
+
+    input("Tekan Enter untuk kembali ke menu utama...")
+
+
+
+        
+
+
+def daftar_pesanan(data_akun):
+    nama_file = "send.csv"
+
+    print(f"Selamat datang, {data_akun['name']}!")
+    print(f"Anda masuk sebagai mitra dengan username: {data_akun['username']}\n")
+
+    while True:
+        baris_csv = tampilkan_data(nama_file)
+        print("Tekan 'r' untuk me-refresh data atau tekan angka untuk menerima pesanan.")
+        input_user = input("Masukkan pilihan (tekan 'r' untuk refresh atau nomor pesanan untuk menerima pesanan): ")
+
+        if input_user.lower() == 'r':
+            print("Data di-refresh...\n")
+            continue
+        try:
+            tekan = int(input_user)
+            if tekan == 0:
+                print("Kembali ke menu utama.")
+                break
+            if tekan < 1 or tekan > len(baris_csv):
+                print("Nomor pesanan tidak valid!")
+            else:
+                nama_pengguna = data_akun['name']
+                username_pengguna = data_akun['username']
+                ubah_status_pesanan(nama_file, baris_csv, tekan, nama_pengguna, username_pengguna)
+
+        except ValueError:
+            print("Input harus berupa angka!")
+
+        time.sleep(2)
+
+
+def main(data_akun):
+    while True:
+        print(f"Selamat datang, mitra {data_akun['name']}!")
+        print("1. Daftar pesanan")
+        print("2. Status pesanan")
+        print("3. Riwayat pengiriman")
+        print("4. Keluar")
+
+        try:
+            dial = int(input("Masukkan angka: "))
+            if dial == 1:
+                daftar_pesanan(data_akun)
+            elif dial == 2:
+                status_pesanan(data_akun)
+            elif dial == 3:
+                print("Fitur Riwayat pengiriman belum tersedia.")
+                input("Tekan Enter untuk kembali ke menu utama...")
+            elif dial == 4:
+                print("Terima kasih telah menggunakan layanan kami.")
+                break
+            else:
+                print("Pilihan tidak valid, silakan coba lagi.")
+        except ValueError:
+            print("Input harus berupa angka!")
+        time.sleep(2)
+
+
+def main(data_akun):
+    while True:
+        print(f"Selamat datang, mitra {data_akun['name']}!")
+        print("1. Daftar pesanan")
+        print("2. Status pesanan")
+        print("3. Riwayat pengiriman")
+        print("4. Keluar")
+
+        try:
+            dial = int(input("Masukkan angka: "))
+            if dial == 1:
+                daftar_pesanan(data_akun)
+            elif dial == 2:
+                status_pesanan(data_akun)
+            elif dial == 3:
+                print("Fitur Riwayat pengiriman belum tersedia.")
+                input("Tekan Enter untuk kembali ke menu utama...")
+            elif dial == 4:
+                print("Terima kasih telah menggunakan layanan kami.")
+                break
+            else:
+                print("Pilihan tidak valid, silakan coba lagi.")
+        except ValueError:
+            print("Input harus berupa angka!")
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:

@@ -1,6 +1,5 @@
 import csv
-import json
-import sys
+
 import semua.login.log as login
 
 # Fungsi untuk menyimpan pesanan ke file CSV
@@ -18,8 +17,9 @@ def show_catalog(data_akun):
     print("1. Beli Barang")
     print("2. Makanan")
     print("3. Barang Tugas")
+    print("0. Kembali ke menu utama")
     
-    pilihan = input("Masukkan pilihan (1/2/3): ").strip()
+    pilihan = input("Masukkan pilihan (1/2/3/0): ").strip()
 
     if pilihan == "1":
         beli_barang(data_akun)
@@ -27,6 +27,8 @@ def show_catalog(data_akun):
         makanan(data_akun)
     elif pilihan == "3":
         barang_tugas(data_akun)
+    elif pilihan == "0":
+        menu_pelanggan(data_akun)
     else:
         print("Pilihan tidak valid! Silakan pilih antara 1, 2, atau 3.")
         show_catalog(data_akun)
@@ -107,8 +109,11 @@ def tampilkan_pesanan(data_akun):
                     print(f"Alamat: {row[5]}")
                     print(f"Status: {row[8]}")
                     print("-" * 30)
+                    input("Tekan Enter untuk kembali ke menu utama...")
+                    menu_pelanggan(data_akun)
             if not found:
                 print("Tidak ada pesanan ditemukan.")
+                input("Tekan Enter untuk kembali ke menu utama...")
     except FileNotFoundError:
         print("File pesanan tidak ditemukan!")
 
@@ -131,8 +136,11 @@ def history_pesanan(data_akun):
                     print(f"Alamat: {row[5]}")
                     print(f"Status: {row[8]}")
                     print("-" * 30)
+                    input("Tekan Enter untuk kembali ke menu utama...")
+                    menu_pelanggan(data_akun)
             if not found:
                 print("Tidak ada pesanan ditemukan.")
+                input("Tekan Enter untuk kembali ke menu utama...")
     except FileNotFoundError:
         print("File pesanan tidak ditemukan!")
 

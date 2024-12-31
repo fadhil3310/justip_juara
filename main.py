@@ -1,8 +1,8 @@
 
 import semua.login.log as login
 
-import khusus_pelanggan.katalog as katalog
-import khusus_mitra.job as job
+import khusus_pelanggan.main as pelanggan
+import khusus_mitra.main as mitra
 
 # Autentikasi dan login
 data_akun = login.authenticate()
@@ -16,10 +16,10 @@ if data_akun['account_type'] == 'pelanggan':
     print("Akun 'pelanggan' terdeteksi. Menjalankan katalog...")
     
     # Menjalankan katalog.py dengan mengirimkan data akun sebagai argumen
-    katalog.menu_pelanggan(data_akun)
+    pelanggan.menu_pelanggan(data_akun)
 elif data_akun['account_type'] == 'mitra':
     print("Akun 'mitra' terdeteksi. Menjalankan job...")
-    job.main(data_akun)
+    mitra.menu_mitra(data_akun)
 
 
 else:

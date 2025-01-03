@@ -1,8 +1,22 @@
+import csv
+
+from semua.file.lokasi_file import lokasi_file
+
+
 def register(username, password, name, account_type):
     # Membuat folder 'login' jika belum ada
     # os.makedirs("login", exist_ok=True)
     # Menyimpan file akun.txt di dalam folder 'login'
-    with open("./akun.csv", "a") as file:
+
+    # Cek apabila sudah ada akun dengan username yang sama
+    with open(lokasi_file["akun"], "r") as file:
+        data_akun = list(csv.reader(file))
+        for _, baris in enumerate(data_akun):
+            if baris[0] == username:
+                print("Sudah ada akun dengan username yang sama")
+                return False
+
+    with open(lokasi_file["akun"], "a") as file:
         file.write(f"{username},{password},{name},{account_type}\n")
     print("Registrasi berhasil.")
     return True
@@ -10,7 +24,7 @@ def register(username, password, name, account_type):
 def login(username, password):
     # Membaca file akun.txt dari folder 'login'
     try:
-        with open("./akun.csv", "r") as file:
+        with open(lokasi_file["akun"], "r") as file:
             for line in file:
                 stored_username, stored_password, stored_nama, stored_akun = line.strip().split(",")
                 if stored_username == username and stored_password == password:
@@ -31,10 +45,23 @@ def authenticate():
     while True:
         pilihan = input("Pilih 'register' atau 'login': ").strip().lower()
         if pilihan == "register":
-            username = input("Masukkan username: ")
-            password = input("Masukkan password: ")
+            username = input("Masukkan username: ").strip()
+            if username == "":
+                print("Username tidak boleh kosong!")
+                continue
+
+            password = input("Masukkan password: ").strip()
+            if password == "" or len(password) < 8:
+                print("Password tidak boleh kosong dan harus lebih dari 8!")
+                continue
+
             nama = input("Masukkan nama lengkap: ")
-            akun = input("Tipe akun? 'mitra' atau 'pelanggan':").strip().lower()        
+            if nama == "":
+                print("Nama tidak boleh kosong!")
+                continue
+
+            akun = input("Tipe akun? 'mitra' atau 'pelanggan':").strip().lower() 
+
             if akun != "mitra" and akun != "pelanggan":
                 print("Tipe akun hanya bisa 'mitra' atau 'pelanggan'")
             else: 

@@ -1,9 +1,16 @@
-Makanan,makan,cikarang
-Makanan,gore,jawa
-Makanan,3,e
-Makanan,jeruk,pasteur
-Barang Tugas,narkoba,detroit,iwan123,iwan
-Beli Barang,air muani,ngawi selatan,kingnasir,nasir jawir
-Makanan,oncom,ngawi barat,iwan123,iwan
-Makanan,pudding hambali,ohio,kingnasir,nasir jawir,dipesan
-Makanan,cilok,12,60000,3000,bogor,iwan123,iwan,dipesan
+ab7b2a44-b438-4cd2-ab39-f135689a7b50,Makanan,aa,1,500,ss,nabil123,Nabil Rizky,dipesan,-,-
+8969ba55-79c6-498a-a4cb-cb269d5b665a,Makanan,AA,23,500,II,nabil123,Nabil Rizky,dipesan,-,-
+bf188772-7b11-4ad6-b961-d78cdc1dc414,Makanan,Ayam,1,500,gedung lama,nabil123,Nabil Rizky,dipesan,-,-
+963dc067-b331-4eaa-be83-6ad823e0ec32,Makanan,Ayam,1,500,gedung lama,nabil123,Nabil Rizky,dipesan,-,-
+6e42dd80-7623-449d-9f56-0773ae3eb8c0,Makanan,Ayam,1,500,gedung baru,nabil123,Nabil Rizky,dipesan,-,-
+fd7fe74c-232c-4f98-ac88-d673d48f442d,Makanan,Ayam,1,500,aa,nabil123,Nabil Rizky,dipesan,-,-
+00f37ef9-dde5-4b8b-acc4-82368b50711d,Makanan,Ayam,1,500,besok,nabil123,Nabil Rizky,dipesan,-,-
+fe563617-e6dc-4ec6-ad4e-cf20bf4283d1,Makanan,Ayam gepuk,2,500,gedung lama,nabil123,Nabil Rizky,diterima,-,-
+767301df-92dc-4f3e-acca-0433b90e3cbe,Beli Barang,Ayam,3,500,2,nabil123,Nabil Rizky,diterima,-,-
+26957453-7b76-4a48-b279-ae48198f42cf,Barang Tugas,Dodol,3,500,Gedung laa,nabil123,Nabil Rizky,diterima,-,-
+76dc6fb7-4907-40b5-8cd4-6cf9fc8afb69,Makanan,Dodol garut,2,500,Gedung lama,nabil123,Nabil Rizky,beres,"('fadilnigga',)",rpl allbase
+eb868297-cd22-41b4-a38d-3be53a59d62f,Makanan,Ayam geprek,1,500,Gedung baru,nabil123,Nabil Rizky,beres,"('fadilnigga',)",rpl allbase
+d193dabb-7943-410f-afc1-828d8babab28,Beli Barang,Ayam,1,500,Gedung lama,nabil123,Nabil Rizky,beres,"('fadilnigga',)",rpl allbase
+076d4c60-bca6-48fe-905d-5434dc9cbcf9,Makanan,Gepuk,1,500,Rumah,nabil123,Nabil Rizky,beres,"('fadilnigga',)",rpl allbase
+6632ce42-e54d-4357-a0c5-2387f0a4ff6d,Beli Barang,Ayam,2,500,gedung,nabil123,Nabil Rizky,diterima,"('fadilnigga',)",rpl allbase
+ad8d2581-a9b0-4a2e-9c2d-0d117ff7cc30,Beli Barang,aa,2,500,11,nabil123,Nabil Rizky,beres,fadilnigga,rpl allbase

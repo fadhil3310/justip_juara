@@ -1,8 +1,13 @@
 import csv
 import json
+import os
 import sys
 import uuid
 import semua.login.log as login
+
+from semua.file.lokasi_file import lokasi_file
+from . import progress_pesanan as progress_pesanan
+
 
 # Fungsi untuk menampilkan katalog
 def tampilkan_katalog(data_akun):
@@ -26,13 +31,22 @@ def tampilkan_katalog(data_akun):
         tampilkan_katalog(data_akun)
 
 
-# Fungsi untuk menyimpan pesanan ke file CSV
-def save_to_csv(pilihan, barang, kuantitas, tip, alamat, username, name, status, nama_mitra, username_mitra):
-    with open('send.csv', mode='a', newline='') as file:
-        id = uuid.uuid4()
+def kirim_pesanan(pilihan, barang, kuantitas, tip, alamat, username, name):
+    id_pesanan = uuid.uuid4()
+
+    # Tambahkan ke file pesanan.csv
+    with open(lokasi_file["pesanan"], mode='a', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow([id, pilihan, barang, kuantitas, tip, alamat, username, name, status, nama_mitra, username_mitra])
-    print(f"Pesanan {barang} telah disimpan ke file pesanan.csv.\n")
+        writer.writerow([id_pesanan, pilihan, barang, kuantitas, tip, alamat, username, name, "dipesan", "-", "-"])
+    
+    # Buat file progress pesanan
+    if not os.path.exists(lokasi_file["progress_pesanan"]):
+        os.mkdir(lokasi_file["progress_pesanan"])
+    with open(lokasi_file["progress_pesanan"] + str(id_pesanan) + ".csv", mode='w'):
+        pass
+
+    progress_pesanan.mulai(lokasi_file["progress_pesanan"] + str(id_pesanan) + ".csv")
+
 
 # Fungsi untuk kategori "Beli Barang"
 def beli_barang(data_akun):
@@ -42,7 +56,7 @@ def beli_barang(data_akun):
     kuantitas = int(input("Masukkan jumlah barang: "))
     tip = int(input("Upah untuk mitra (Rupiah): ")) 
     print(f"\nPesanan Anda: {barang} akan dikirim ke {alamat}.")
-    save_to_csv("Beli Barang", barang, kuantitas, tip, alamat, data_akun["username"], data_akun["name"], "dipesan", "Tidak ada" , "tidak ada")
+    kirim_pesanan("Beli Barang", barang, kuantitas, tip, alamat, data_akun["username"], data_akun["name"])
 
 # Fungsi untuk kategori "Makanan"
 def makanan(data_akun):
@@ -52,7 +66,7 @@ def makanan(data_akun):
     kuantitas = int(input("Masukkan jumlah makanan: "))
     tip = int(input("Upah untuk mitra (Rupiah): ")) 
     print(f"\nPesanan Anda: {makanan} akan dikirim ke {alamat}.")
-    save_to_csv("Makanan", makanan, kuantitas, tip, alamat, data_akun["username"], data_akun["name"], "dipesan", "Tidak ada" , "tidak ada")
+    kirim_pesanan("Makanan", makanan, kuantitas, tip, alamat, data_akun["username"], data_akun["name"])
 
 # Fungsi untuk kategori "Barang Tugas"
 def barang_tugas(data_akun):
@@ -62,7 +76,7 @@ def barang_tugas(data_akun):
     kuantitas = int(input("Masukkan jumlah barang: "))
     tip = int(input("Upah untuk mitra (Rupiah): ")) 
     print(f"\nPesanan Anda: {tugas} untuk tugas akan dikirim ke {alamat}.")
-    save_to_csv("Barang Tugas", tugas, kuantitas, tip, alamat, data_akun["username"], data_akun["name"], "dipesan", "Tidak ada" , "tidak ada")
+    kirim_pesanan("Barang Tugas", tugas, kuantitas, tip, alamat, data_akun["username"], data_akun["name"])
 
 
     
